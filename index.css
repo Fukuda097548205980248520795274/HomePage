@@ -1,0 +1,343 @@
+/* ===================================================
+   全体設定（澄んだ空と自然のやさしいカラー）
+   =================================================== */
+@charset "UTF-8";
+
+body {
+    font-family: 'Zen Maru Gothic', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #384e44; /* 目に優しい深みのあるナチュラルグリーン */
+    line-height: 1.8;
+    
+    /* ▼▼▼ ここから変更・追加 ▼▼▼ */
+    /* 春(今の色) -> 夏 -> 秋 -> 冬 -> 春(ループ用) の大きなグラデーションを作成 */
+    background: linear-gradient(
+        180deg, 
+        #d3f0f7 0%, #e6f7f2 5%, #d8eee6 10%,     /* 春 (現在のお気に入りの色) */
+        #b2ebf2 25%, #81d4fa 30%, #a5d6a7 35%,   /* 夏 (爽やかな水色と新緑) */
+        #fff9c4 50%, #ffcc80 55%, #ffab91 60%,   /* 秋 (夕暮れと紅葉) */
+        #e3f2fd 75%, #bbdefb 80%, #90caf9 85%,   /* 冬 (澄んだ冬空) */
+        #d3f0f7 95%, #e6f7f2 98%, #d8eee6 100%   /* 春 (ループして繋げる用) */
+    );
+    background-size: 100% 1000%; /* グラデーションを縦に長く引き延ばす */
+    animation: changeSeasons 120s linear infinite; /* 120秒かけてゆっくり春夏秋冬を巡る */
+    /* ▲▲▲ ここまで変更・追加 ▲▲▲ */
+    
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 追加: 背景を移動させて季節の変化を表現するアニメーション */
+@keyframes changeSeasons {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+/* ===================================================
+   ふわふわ漂う背景アニメーション（綿毛や光のイメージ）
+   =================================================== */
+.fluff-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fluff {
+    position: absolute;
+    font-size: 1.6rem;
+    opacity: 0.5;
+    animation: float 8s infinite ease-in-out;
+}
+
+.fluff-1 { top: 15%; left: 8%; animation-duration: 9s; }
+.fluff-2 { top: 35%; right: 10%; animation-duration: 7s; animation-delay: 1s; }
+.fluff-3 { bottom: 25%; left: 12%; animation-duration: 10s; animation-delay: 2s; }
+.fluff-4 { top: 70%; right: 18%; animation-duration: 8s; animation-delay: 0.5s; }
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(12deg);
+    }
+}
+
+/* ===================================================
+   ヘッダー（すりガラス風・浮遊感デザイン）
+   =================================================== */
+header {
+    position: sticky;
+    top: 15px;
+    z-index: 100;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-inner {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 12px 28px;
+    box-shadow: 0 8px 20px rgba(90, 140, 150, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo .icon {
+    font-size: 1.4rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c5140;
+    letter-spacing: 0.03em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    color: #4a6859;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #ebf7f1;
+    color: #22683e;
+}
+
+/* ===================================================
+   メインコンテンツ（丸みと透明感のある白カード）
+   =================================================== */
+main {
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 35px 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 25px rgba(100, 150, 140, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(90, 150, 140, 0.15);
+}
+
+h2 {
+    color: #2c5140;
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.45rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px dashed #cde6d8;
+    padding-bottom: 10px;
+}
+
+.title-icon {
+    font-size: 1.3rem;
+}
+
+p {
+    margin: 0 0 15px 0;
+}
+
+a {
+    color: #3b8e5a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #f39c12; /* たんぽぽイエロー */
+}
+
+/* プロジェクト一覧のスタイル */
+.project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 15px;
+}
+
+.project-card {
+    display: block;
+    background: #f4faf6;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid #d8ebd9;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.project-card:hover {
+    background: #ebf7f0;
+    border-color: #88cb9e;
+    transform: translateX(5px);
+}
+
+.project-title {
+    display: block;
+    font-weight: 700;
+    color: #2c5140;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.project-desc {
+    display: block;
+    font-size: 0.9em;
+    color: #5c7367;
+}
+
+/* 丸みのある可愛いボタン */
+.contact-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #5ea872;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(94, 168, 114, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #4d9360;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(94, 168, 114, 0.4);
+    text-decoration: none;
+}
+
+/* ===================================================
+   フッター
+   =================================================== */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+    color: #5d7c6e;
+    font-size: 0.9em;
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .card {
+        padding: 25px 20px;
+    }
+}
+
+
+/* プロジェクトカード全体のスタイル調整 */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+/* 説明テキスト部分 */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333333;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    color: #666666;
+    line-height: 1.6;
+}
+
+/* 画像2枚を横並びにするスタイル */
+.project-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.project-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #f0f0f0; /* 画像がない時のグレー仮背景 */
+    border: 1px dashed #ccc;   /* 仮置きだと分かりやすい点線枠 */
+}
+
+/* スマホなど画面幅が狭い場合の調整 */
+@media (max-width: 600px) {
+    .project-images {
+        grid-template-columns: 1fr; /* 縦並びに切り替え */
+    }
+}
