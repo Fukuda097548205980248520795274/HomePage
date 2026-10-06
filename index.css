@@ -349,7 +349,7 @@ footer {
 .project-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    background: rgba(255, 255, 255, 0.95);
+    background: #eaf6f0; /* ホバー時の背景色（お好みの色に変更してください） */
 }
 
 /* 説明テキスト部分 */
@@ -489,21 +489,25 @@ section[id] {
 
 /* メニューがあるページのメインコンテンツ（作品ページのみ） */
 main:has(.category-menu) {
-    display: grid;
-    grid-template-columns: 220px 1fr; /* 左に220pxのメニュー、右に残りの幅（カード） */
-    gap: 40px;                        /* メニューとカードの間の余白 */
-    max-width: 1500px;                /* 全体の最大幅を広げて、カードが小さくならないようにする */
-    align-items: start;               /* 上端で揃える */
+    display: block; /* グリッドを解除し、通常の中央配置に戻す */
 }
 
-/* カテゴリジャンプメニューの装飾（左側固定） */
+/* カテゴリジャンプメニューの装飾（左端と作品の間に固定） */
 .category-menu {
-    position: sticky;  /* fixedからstickyに変更し、レイアウト崩れを防止 */
-    top: 120px;        /* スクロール時に画面上で止まる位置 */
+    position: fixed;   /* 画面に追従させる */
+    top: 50%;          /* 上下の中央に配置 */
+    /* 画面幅(100vw)から作品幅(1200px)を引いた余白のさらに半分(1/4)の位置に配置 */
+    left: calc((100vw - 1200px) / 4);
+    transform: translate(-50%, -50%); /* 中心点を基準に配置 */
+    width: 220px;
     padding: 20px;
-    margin-bottom: 0;
-    grid-column: 1;    /* グリッドの左側に配置 */
-    grid-row: 1 / 100; /* 行を下に伸ばす（右側のカードが何枚並んでも崩れないように） */
+    margin: 0;
+    z-index: 10;       /* 他の要素より上に表示 */
+}
+
+.category-menu:hover {
+    /* 縦横-50%の基準位置を保ったまま、4pxだけ上に浮かす */
+    transform: translate(-50%, calc(-50% - 4px));
 }
 
 /* リンクを縦並びにする */
@@ -512,7 +516,7 @@ main:has(.category-menu) {
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* 縦並びに変更 */
+    flex-direction: column; /* 縦並び */
     gap: 12px;
 }
 
@@ -537,32 +541,22 @@ main:has(.category-menu) {
 
 /* カード（右側のプロジェクト一覧）の設定 */
 .category-menu ~ .card {
-    grid-column: 2; /* グリッドの右側に配置 */
-    margin-left: 0; /* 前回の margin-left をリセット */
-    max-width: 1200px; /* カード単体の最大幅は元々の1200pxに保つ */
+    /* 親要素の1200px中央寄せに従うため、不要な指定を削除 */
     width: 100%;
 }
 
-/* --- スマホなど画面幅が狭い場合の調整 --- */
-@media (max-width: 1000px) {
-    main:has(.category-menu) {
-        display: block; /* 画面が狭いときは横並び（グリッド）を解除 */
-        max-width: 1200px;
-    }
+/* --- 画面幅が狭い場合（メニューがはみ出す幅）の調整 --- */
+/* 左の余白が狭くなったら、メニューを上部に横並びで表示するように変更 */
+@media (max-width: 1650px) {
     .category-menu {
-        position: static; /* 追従を解除して元の位置に */
+        position: static;  /* 固定表示を解除 */
+        transform: none;
         width: auto;
-        grid-column: auto;
-        grid-row: auto;
         margin-bottom: 35px;
     }
     .anchor-links {
-        flex-direction: row; /* 横並びに戻す */
+        flex-direction: row; /* 横並びに変更 */
         flex-wrap: wrap;
         justify-content: center;
-    }
-    .category-menu ~ .card {
-        grid-column: auto;
-        max-width: none;
     }
 }
