@@ -28,6 +28,8 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+
+    animation: fadeIn 0.8s ease-out forwards, changeSeasons 120s linear infinite;
 }
 
 /* 追加: 背景を移動させて季節の変化を表現するアニメーション */
@@ -39,6 +41,46 @@ body {
         background-position: 0% 100%;
     }
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* ===================================================
+   サイトタイトル（一番上に表示）
+   =================================================== */
+.site-title-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 20px; /* 上に余白をもたせる */
+    position: relative;
+    z-index: 1; /* 綿毛より手前に表示 */
+}
+
+.site-title-container .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-title-container .icon {
+    font-size: 2.2rem;
+}
+
+.site-title-container h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c5140;
+    letter-spacing: 0.05em;
+}
+
 
 /* ===================================================
    ふわふわ漂う背景アニメーション（綿毛や光のイメージ）
@@ -81,22 +123,23 @@ header {
     position: sticky;
     top: 15px;
     z-index: 100;
-    max-width: 900px;
+    max-width: 600px; /* バーの幅をメニューに合わせて少しコンパクトに */
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .header-inner {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 30px;
-    padding: 12px 28px;
-    box-shadow: 0 8px 20px rgba(90, 140, 150, 0.12);
+    /* 透明度を少し上げ、ぼかしを強くして今風のすりガラスに */
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 50px;
+    padding: 12px 32px;
+    box-shadow: 0 4px 24px rgba(90, 140, 150, 0.08);
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 変更: メニューを中央寄せにする */
     align-items: center;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .logo {
@@ -122,7 +165,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 10px;
+    gap: 15px; /* メニューの隙間を少し広げる */
 }
 
 nav ul li a {
@@ -144,7 +187,7 @@ nav ul li a.active {
    メインコンテンツ（丸みと透明感のある白カード）
    =================================================== */
 main {
-    max-width: 800px;
+    max-width: 1200px; /* 800pxから1200pxに変更 */
     margin: 35px auto;
     padding: 0 20px;
     position: relative;
@@ -152,19 +195,19 @@ main {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    border-radius: 24px;
-    padding: 35px 40px;
+    background: rgba(255, 255, 255, 0.75); /* 背景を少し透過 */
+    backdrop-filter: blur(16px);
+    border-radius: 32px; /* 24pxから少し丸みを強調 */
+    padding: 40px 48px; /* 内側の余白を広げてゆったりと */
     margin-bottom: 28px;
-    box-shadow: 0 10px 25px rgba(100, 150, 140, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(100, 150, 140, 0.06); /* 影をより柔らかく */
+    border: 1px solid rgba(255, 255, 255, 0.8); /* 2pxから1pxへ */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(90, 150, 140, 0.15);
+    box-shadow: 0 16px 40px rgba(90, 150, 140, 0.1);
 }
 
 h2 {
@@ -202,24 +245,27 @@ a:hover {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    gap: 15px;
+    display: flex;
+    flex-direction: column; /* 縦1列に並べる */
+    gap: 40px; /* カード同士の間隔を大きくして、ゆったり見せる */
 }
 
 .project-card {
-    display: block;
-    background: #f4faf6;
-    padding: 16px 20px;
-    border-radius: 16px;
-    border: 1px solid #d8ebd9;
-    text-decoration: none;
-    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.8); /* 完全な白から少し透かす */
+    border-radius: 24px; 
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* 浮遊感のある薄い影 */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .project-card:hover {
-    background: #ebf7f0;
-    border-color: #88cb9e;
-    transform: translateX(5px);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .project-title {
@@ -245,20 +291,20 @@ a:hover {
 
 .btn {
     display: inline-block;
-    padding: 10px 24px;
-    background: #5ea872;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #6cbd82 0%, #4d9360 100%); /* 単色から微細なグラデーションへ */
     color: #ffffff;
     border-radius: 50px;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(94, 168, 114, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(94, 168, 114, 0.25);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: none;
 }
 
 .btn:hover {
-    background: #4d9360;
+    transform: translateY(-3px) scale(1.02); /* ふわっと浮き上がる */
+    box-shadow: 0 8px 24px rgba(94, 168, 114, 0.35);
     color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(94, 168, 114, 0.4);
     text-decoration: none;
 }
 
@@ -291,53 +337,119 @@ footer {
 .project-card {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
+    gap: 20px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.8); /* 完全な白から少し透かす */
+    border-radius: 24px; 
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* 浮遊感のある薄い影 */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 /* 説明テキスト部分 */
 .project-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .project-title {
-    font-size: 1.25rem;
+    font-size: 1.8rem; /* タイトルをかなり大きくして目立たせる */
     font-weight: 700;
     color: #333333;
 }
 
 .project-desc {
-    font-size: 0.95rem;
+    font-size: 1.1rem; /* 説明文も読みやすいサイズに */
     color: #666666;
-    line-height: 1.6;
+    line-height: 1.8;
 }
 
 /* 画像2枚を横並びにするスタイル */
 .project-images {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 5px;
+    gap: 15px; /* 画像同士の隙間も広げる */
+    margin-top: auto;
 }
 
 .project-img {
     width: 100%;
-    height: 180px;
+    height: 260px;
     object-fit: cover;
-    border-radius: 8px;
-    background-color: #f0f0f0; /* 画像がない時のグレー仮背景 */
-    border: 1px dashed #ccc;   /* 仮置きだと分かりやすい点線枠 */
+    border-radius: 16px; /* 丸みを少し強調 */
+    background-color: #f8fbf9; 
+    /* border: 1px dashed #ccc; を削除（モダンUIでは枠線をなくすことが多いです） */
+    border: none; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); /* 画像単体にもごく薄い影を追加 */
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.02);
 }
 
 /* スマホなど画面幅が狭い場合の調整 */
 @media (max-width: 600px) {
     .project-images {
         grid-template-columns: 1fr; /* 縦並びに切り替え */
+    }
+}
+
+
+/* プロフィール全体のレイアウト（PC等の広い画面用） */
+.profile-container {
+    display: flex;          /* 横並びにする */
+    align-items: flex-start; /* 上端を揃える */
+    gap: 30px;              /* テキストと写真の間の余白 */
+}
+
+
+/* --- 上部の横並びレイアウト --- */
+.profile-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* 中央寄せ */
+    gap: 40px;                /* テキストと写真の間の距離 */
+    max-width: 650px;         /* ★上部エリア全体の最大横幅を制限して間延びを防ぐ */
+    margin: 10px auto 35px auto; /* ★中央に配置し、下に余白を作る */
+}
+
+/* 左側の基本情報エリア */
+.profile-info {
+    flex: 1;
+}
+
+/* 右側の写真エリア */
+.profile-image {
+    width: 180px;            /* 写真のサイズ（お好みで 180px〜200px 程度に調整） */
+    flex-shrink: 0;
+}
+
+/* 写真自体のデザイン */
+.profile-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- スマートフォン向けのレイアウト --- */
+@media (max-width: 768px) {
+    .profile-top {
+        flex-direction: column-reverse; /* スマホでは縦並び（写真を上にする場合は column に変更） */
+        text-align: center; /* スマホ画面ではテキストを中央寄せにすると綺麗です */
+    }
+    .profile-image {
+        margin: 0 auto 20px auto; /* 写真を中央に配置し、下に余白 */
+    }
+    .profile-bottom {
+        text-align: left; /* 長い文章は読みやすいように左揃えのまま */
     }
 }

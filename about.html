@@ -18,16 +18,21 @@
         <span class="fluff fluff-4">🌿</span>
     </div>
 
+    <!-- 追加: サイトタイトルを一番上に配置 -->
+    <div class="site-title-container">
+        <div class="logo">
+            <span class="icon">🌼</span>
+            <h1>ひだまり</h1>
+        </div>
+    </div>
+
+    <!-- バー（ナビゲーション）: スクロールで上部に固定される部分 -->
     <header>
         <div class="header-inner">
-            <div class="logo">
-                <span class="icon">🌼</span>
-                <h1>ひだまり</h1>
-            </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">ホーム</a></li>
-                    <li><a href="about.html" class="active">あいさつ</a></li>
+                    <li><a href="index.html">ホーム</a></li> <!-- ※各ページで class="active" の位置は合わせてください -->
+                    <li><a href="about.html">あいさつ</a></li>
                     <li><a href="projects.html">作品</a></li>
                     <li><a href="contact.html">アカウント</a></li>
                 </ul>
@@ -37,8 +42,34 @@
     
     <main>
         <section class="card">
+            <!-- ★タイトルを上部エリアの外（一番上）に出す -->
             <h2><span class="title-icon">🌿</span> ごあいさつ </h2>
-            <p>福田颯羽と申します。よろしくお願いいたします。</p>
+
+            <!-- 上部：基本情報と顔写真（横並び・中央寄せ） -->
+            <div class="profile-top">
+                <!-- 左側：短いテキスト -->
+                <div class="profile-info">
+                    <!-- 挨拶文だけを残す -->
+                    <p>初めまして、<strong>福田 颯羽</strong>と申します。<br>プログラマを担当しています。</p>
+                </div>
+
+                <!-- 右側：顔写真 -->
+                <div class="profile-image">
+                    <img src="profile.jpg" alt="福田 颯羽の顔写真">
+                </div>
+            </div>
+
+            <!-- 下部：趣味などの長い文章（横幅いっぱいに表示） -->
+            <div class="profile-bottom">
+                <h3>🌱 趣味について</h3>
+                <p>私の趣味は<strong>「命」「季節」「知らない世界を知る」</strong>ことです。</p>
+                
+                <p>中でも、私は<strong>「命」</strong>を感じるものがとても好きです。<br>
+                動物や植物など、実際に生きているものはもちろん、AIやロボットなど、生物ではなくても「そこに命を感じる」という感覚に強く惹かれます。<br>
+                そして、それがどんな風に生きているのかを想像するのが私の趣味です。</p>
+                
+                <p>地球や生態系など、命がつながって生まれる世界にも魅力を感じています。<br>どうぞよろしくお願いいたします。</p>
+            </div>
         </section>
     </main>
 
