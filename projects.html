@@ -18,7 +18,7 @@
         <span class="fluff fluff-4">🌿</span>
     </div>
 
-    <!-- 追加: サイトタイトルを一番上に配置 -->
+    <!-- サイトタイトル -->
     <div class="site-title-container">
         <div class="logo">
             <span class="icon">🌼</span>
@@ -26,14 +26,14 @@
         </div>
     </div>
 
-    <!-- バー（ナビゲーション）: スクロールで上部に固定される部分 -->
+    <!-- ナビゲーションバー -->
     <header>
         <div class="header-inner">
             <nav>
                 <ul>
-                    <li><a href="index.html">ホーム</a></li> <!-- ※各ページで class="active" の位置は合わせてください -->
+                    <li><a href="index.html">ホーム</a></li>
                     <li><a href="about.html">あいさつ</a></li>
-                    <li><a href="projects.html">作品</a></li>
+                    <li><a href="projects.html" class="active">作品</a></li>
                     <li><a href="contact.html">アカウント</a></li>
                 </ul>
             </nav>
@@ -41,16 +41,35 @@
     </header>
     
     <main>
-        <section class="card">
-            <h2><span class="title-icon">🌱</span> 今までの作品 </h2>
+        <!-- ▼ 新規追加: カテゴリジャンプ用のメニュー ▼ -->
+        <section class="card category-menu">
+            <ul class="anchor-links">
+                <li><a href="#personal">👤 個人制作</a></li>
+                <li><a href="#team1">🌱 1年生チーム制作</a></li>
+                <li><a href="#team2">🌿 2年生チーム制作</a></li>
+                <li><a href="#team3">🌳 3年チーム制作</a></li>
+                <li><a href="#jam">⚡ 10daysJam</a></li>
+            </ul>
+        </section>
+        <!-- ▲ ここまで追加 ▲ -->
+
+        <!-- 各sectionに id="..." を追加しています -->
+
+        <!-- 個人制作 -->
+        <section id="personal" class="card">
+            <h2><span class="title-icon">👤</span> 個人制作</h2>
             <ul class="project-list">
-                
                 <!-- 月龍 -->
                 <li>
                     <a href="tsukiryu.html" class="project-card">
                         <div class="project-info">
-                            <span class="project-title">月龍 (3Dアクション)</span>
-                            <span class="project-desc">就職活動作品として3ヶ月で制作した3D格闘ゲームです。協調AIを作成し、集団戦に特化した戦闘を可能にしました。</span>
+                            <span class="project-title">月龍</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>3Dアクション</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>5ヶ月</span>
+                            </div>
+                            <span class="project-desc">就職活動作品として制作した3D格闘ゲームです。協調AIを作成し、集団戦に特化した戦闘を可能にしました。</span>
                         </div>
                         <div class="project-images">
                             <img src="images/tsukiryu_1.jpg" alt="月龍 スクリーンショット1" class="project-img">
@@ -58,12 +77,16 @@
                         </div>
                     </a>
                 </li>
-
                 <!-- 実力行使 -->
                 <li>
                     <a href="jitsuryoku.html" class="project-card">
                         <div class="project-info">
-                            <span class="project-title">実力行使 (3Dアクション)</span>
+                            <span class="project-title">実力行使</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>3Dアクション</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>4ヶ月</span>
+                            </div>
                             <span class="project-desc">「月龍」のもととなった作品です。1対1での戦闘を中心とした3Dアクションゲームとして開発しました。</span>
                         </div>
                         <div class="project-images">
@@ -72,138 +95,16 @@
                         </div>
                     </a>
                 </li>
-
-                <!-- MESSY WORLD -->
-                <li>
-                    <a href="messyWorld.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">MESSY WORLD (パズル)</span>
-                            <span class="project-desc">3年チーム制作（4ヶ月）。タイトル画面のライティングや多数のエフェクトを駆使し、高品質な絵作りを目指しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/messyworld_1.jpg" alt="MESSY WORLD スクリーンショット1" class="project-img">
-                            <img src="images/messyworld_2.jpg" alt="MESSY WORLD スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- 相対傘 -->
-                <li>
-                    <a href="aitaigasa.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">相対傘 (3Dシューティング)</span>
-                            <span class="project-desc">2年チーム制作。カメラワークを生かし、ボス着地時の演出など歌舞伎の力強い演技を表現しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/aitaigasa_1.jpg" alt="相対傘 スクリーンショット1" class="project-img">
-                            <img src="images/aitaigasa_2.jpg" alt="相対傘 スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- Snow Shot Show!! -->
-                <li>
-                    <a href="snowshotshow.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">Snow Shot Show!! (3Dシューティング)</span>
-                            <span class="project-desc">2年チーム制作。ビヘイビアツリーを利用してボスを作成し、狙いやすいようプレイヤーの視点を工夫しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/snowshotshow_1.jpg" alt="Snow Shot Show!! スクリーンショット1" class="project-img">
-                            <img src="images/snowshotshow_2.jpg" alt="Snow Shot Show!! スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- GUN SPINNER -->
-                <li>
-                    <a href="gunspinner.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">GUN SPINNER (ワンボタンシューティング)</span>
-                            <span class="project-desc">2年チーム制作。フィルムグレインや空気感のあるパーティクルで不気味な遺跡の雰囲気を演出しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/gunspinner_1.jpg" alt="GUN SPINNER スクリーンショット1" class="project-img">
-                            <img src="images/gunspinner_2.jpg" alt="GUN SPINNER スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- わたる -->
-                <li>
-                    <a href="wataru.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">わたる (アクションパズル)</span>
-                            <span class="project-desc">10daysJamで制作。自身の企画をもとに、ゲームシステムやエディタも自作し、チーム開発しやすい環境を作りました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/wataru_1.jpg" alt="わたる スクリーンショット1" class="project-img">
-                            <img src="images/wataru_2.jpg" alt="わたる スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- モアイズ -->
-                <li>
-                    <a href="moais.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">モアイズ (パズル)</span>
-                            <span class="project-desc">10daysJamで制作。チームメンバーのためにエディタやエンジン層を担当し、エラーが起きないよう努めました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/moais_1.jpg" alt="モアイズ スクリーンショット1" class="project-img">
-                            <img src="images/moais_2.jpg" alt="モアイズ スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- ゆきどけ～ -->
-                <li>
-                    <a href="yukidoke.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">ゆきどけ～ (2Dアクションパズル)</span>
-                            <span class="project-desc">1年チーム制作（2ヶ月）。プログラマとプランナーを兼任し、デバッグと修正を重ねて自然な坂道の挙動を実現しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/yukidoke_1.jpg" alt="ゆきどけ～ スクリーンショット1" class="project-img">
-                            <img src="images/yukidoke_2.jpg" alt="ゆきどけ～ スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- 爆男子 -->
-                <li>
-                    <a href="bakudan.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">爆男子 (2Dアクション)</span>
-                            <span class="project-desc">1年チーム制作。初めてパーティクルを導入し、ポップな爆発エフェクトを表現しました。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/bakudan_1.jpg" alt="爆男子 スクリーンショット1" class="project-img">
-                            <img src="images/bakudan_2.jpg" alt="爆男子 スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
-                <!-- ぴかぴか風船 -->
-                <li>
-                    <a href="pikapika.html" class="project-card">
-                        <div class="project-info">
-                            <span class="project-title">ぴかぴか風船 (2Dアクションパズル)</span>
-                            <span class="project-desc">1年チーム制作。システム全てを自作し、ゲーム性が面白いと高い評価をいただいた作品です。</span>
-                        </div>
-                        <div class="project-images">
-                            <img src="images/pikapika_1.jpg" alt="ぴかぴか風船 スクリーンショット1" class="project-img">
-                            <img src="images/pikapika_2.jpg" alt="ぴかぴか風船 スクリーンショット2" class="project-img">
-                        </div>
-                    </a>
-                </li>
-
                 <!-- 白蛇 -->
                 <li>
                     <a href="hakuja.html" class="project-card">
                         <div class="project-info">
-                            <span class="project-title">白蛇 (2Dアクション)</span>
+                            <span class="project-title">白蛇</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>2Dアクション</span>
+                                <span>・<strong>開発環境：</strong>学内制エンジン</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
                             <span class="project-desc">1年個人制作。前作のジャスト回避をメインシステムに組み込んで制作した初めての2Dアクションです。</span>
                         </div>
                         <div class="project-images">
@@ -212,13 +113,17 @@
                         </div>
                     </a>
                 </li>
-
                 <!-- こいのぼり -->
                 <li>
                     <a href="koinobori.html" class="project-card">
                         <div class="project-info">
-                            <span class="project-title">こいのぼり (2Dシューティング)</span>
-                            <span class="project-desc">1年個人制作（2ヶ月）。授業で習った基礎を固めて作った初めてのゲーム制作で、ジャスト回避などを実装しました。</span>
+                            <span class="project-title">こいのぼり</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>2Dシューティング</span>
+                                <span>・<strong>開発環境：</strong>学内制エンジン</span>
+                                <span>・<strong>開発期間：</strong>2ヶ月</span>
+                            </div>
+                            <span class="project-desc">1年個人制作。授業で習った基礎を固めて作った初めてのゲーム制作で、ジャスト回避などを実装しました。</span>
                         </div>
                         <div class="project-images">
                             <img src="images/koinobori_1.jpg" alt="こいのぼり スクリーンショット1" class="project-img">
@@ -226,7 +131,196 @@
                         </div>
                     </a>
                 </li>
+            </ul>
+        </section>
 
+        <!-- 1年生チーム制作 -->
+        <section id="team1" class="card">
+            <h2><span class="title-icon">🌱</span> 1年生チーム制作</h2>
+            <ul class="project-list">
+                <!-- ぴかぴか風船 -->
+                <li>
+                    <a href="pikapika.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">ぴかぴか風船</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>2Dアクションパズル</span>
+                                <span>・<strong>開発環境：</strong>学内制エンジン</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
+                            <span class="project-desc">1年チーム制作。システム全てを自作し、ゲーム性が面白いと高い評価をいただいた作品です。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/pikapika_1.jpg" alt="ぴかぴか風船 スクリーンショット1" class="project-img">
+                            <img src="images/pikapika_2.jpg" alt="ぴかぴか風船 スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+                <!-- 爆男子 -->
+                <li>
+                    <a href="bakudan.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">爆男子</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>2Dアクション</span>
+                                <span>・<strong>開発環境：</strong>学内制エンジン</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
+                            <span class="project-desc">1年チーム制作。初めてパーティクルを導入し、ポップな爆発エフェクトを表現しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/bakudan_1.jpg" alt="爆男子 スクリーンショット1" class="project-img">
+                            <img src="images/bakudan_2.jpg" alt="爆男子 スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+                <!-- ゆきどけ～ -->
+                <li>
+                    <a href="yukidoke.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">ゆきどけ～</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>2Dアクションパズル</span>
+                                <span>・<strong>開発環境：</strong>学内制エンジン</span>
+                                <span>・<strong>開発期間：</strong>2ヶ月</span>
+                            </div>
+                            <span class="project-desc">1年チーム制作。プログラマとプランナーを兼任し、デバッグと修正を重ねて自然な坂道の挙動を実現しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/yukidoke_1.jpg" alt="ゆきどけ～ スクリーンショット1" class="project-img">
+                            <img src="images/yukidoke_2.jpg" alt="ゆきどけ～ スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 2年生チーム制作 -->
+        <section id="team2" class="card">
+            <h2><span class="title-icon">🌿</span> 2年生チーム制作</h2>
+            <ul class="project-list">
+                <!-- GUN SPINNER -->
+                <li>
+                    <a href="gunspinner.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">GUN SPINNER</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>ワンボタンシューティング</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
+                            <span class="project-desc">2年チーム制作。フィルムグレインや空気感のあるパーティクルで不気味な遺跡の雰囲気を演出しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/gunspinner_1.jpg" alt="GUN SPINNER スクリーンショット1" class="project-img">
+                            <img src="images/gunspinner_2.jpg" alt="GUN SPINNER スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+                <!-- Snow Shot Show!! -->
+                <li>
+                    <a href="snowshotshow.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">Snow Shot Show!!</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>3Dシューティング</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
+                            <span class="project-desc">2年チーム制作。ビヘイビアツリーを利用してボスを作成し、狙いやすいようプレイヤーの視点を工夫しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/snowshotshow_1.jpg" alt="Snow Shot Show!! スクリーンショット1" class="project-img">
+                            <img src="images/snowshotshow_2.jpg" alt="Snow Shot Show!! スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+                <!-- 相対傘 -->
+                <li>
+                    <a href="aitaigasa.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">相対傘</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>3Dシューティング</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>1ヶ月</span>
+                            </div>
+                            <span class="project-desc">2年チーム制作。カメラワークを生かし、ボス着地時の演出など歌舞伎の力強い演技を表現しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/aitaigasa_1.jpg" alt="相対傘 スクリーンショット1" class="project-img">
+                            <img src="images/aitaigasa_2.jpg" alt="相対傘 スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 3年チーム制作 -->
+        <section id="team3" class="card">
+            <h2><span class="title-icon">🌳</span> 3年チーム制作</h2>
+            <ul class="project-list">
+                <!-- MESSY WORLD -->
+                <li>
+                    <a href="messyWorld.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">MESSY WORLD</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>パズル</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>4ヶ月</span>
+                            </div>
+                            <span class="project-desc">3年チーム制作。タイトル画面のライティングや多数のエフェクトを駆使し、高品質な絵作りを目指しました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/messyworld_1.jpg" alt="MESSY WORLD スクリーンショット1" class="project-img">
+                            <img src="images/messyworld_2.jpg" alt="MESSY WORLD スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 10daysJam -->
+        <section id="jam" class="card">
+            <h2><span class="title-icon">⚡</span> 10daysJam</h2>
+            <ul class="project-list">
+                <!-- モアイズ -->
+                <li>
+                    <a href="moais.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">モアイズ</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>パズル</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>10日間 (10daysJam)</span>
+                            </div>
+                            <span class="project-desc">チームメンバーのためにエディタやエンジン層を担当し、エラーが起きないよう努めました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/moais_1.jpg" alt="モアイズ スクリーンショット1" class="project-img">
+                            <img src="images/moais_2.jpg" alt="モアイズ スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
+                <!-- わたる -->
+                <li>
+                    <a href="wataru.html" class="project-card">
+                        <div class="project-info">
+                            <span class="project-title">わたる</span>
+                            <div class="project-details">
+                                <span>・<strong>ジャンル：</strong>アクションパズル</span>
+                                <span>・<strong>開発環境：</strong>C++ / DirectX</span>
+                                <span>・<strong>開発期間：</strong>10日間 (10daysJam)</span>
+                            </div>
+                            <span class="project-desc">自身の企画をもとに、ゲームシステムやエディタも自作し、チーム開発しやすい環境を作りました。</span>
+                        </div>
+                        <div class="project-images">
+                            <img src="images/wataru_1.jpg" alt="わたる スクリーンショット1" class="project-img">
+                            <img src="images/wataru_2.jpg" alt="わたる スクリーンショット2" class="project-img">
+                        </div>
+                    </a>
+                </li>
             </ul>
         </section>
     </main>

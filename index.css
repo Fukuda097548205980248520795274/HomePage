@@ -359,6 +359,25 @@ footer {
     gap: 12px;
 }
 
+/* プロジェクト詳細（ジャンル・開発環境・開発期間） */
+.project-details {
+    margin: 10px 0 14px 0;
+    color: #2c5140; /* 文字色を濃くしてメリハリを付与 */
+    font-size: 1.05rem; /* 文字サイズを大きく変更 */
+    line-height: 1.8;
+}
+
+.project-details span {
+    display: block;
+    font-weight: 500;
+}
+
+/* 項目名（ジャンル、開発環境、開発期間）をくっきり太字にする */
+.project-details strong {
+    font-weight: 700;
+    color: #1e3a2d;
+}
+
 .project-title {
     font-size: 1.8rem; /* タイトルをかなり大きくして目立たせる */
     font-weight: 700;
@@ -451,5 +470,99 @@ footer {
     }
     .profile-bottom {
         text-align: left; /* 長い文章は読みやすいように左揃えのまま */
+    }
+}
+
+
+/* ===================================================
+   ページ内リンク（アンカー）のスクロール設定
+   =================================================== */
+/* スムーズスクロールを有効化 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ページ上部の固定ヘッダーにセクションタイトルが隠れないように余白を取る */
+section[id] {
+    scroll-margin-top: 100px;
+}
+
+/* メニューがあるページのメインコンテンツ（作品ページのみ） */
+main:has(.category-menu) {
+    display: grid;
+    grid-template-columns: 220px 1fr; /* 左に220pxのメニュー、右に残りの幅（カード） */
+    gap: 40px;                        /* メニューとカードの間の余白 */
+    max-width: 1500px;                /* 全体の最大幅を広げて、カードが小さくならないようにする */
+    align-items: start;               /* 上端で揃える */
+}
+
+/* カテゴリジャンプメニューの装飾（左側固定） */
+.category-menu {
+    position: sticky;  /* fixedからstickyに変更し、レイアウト崩れを防止 */
+    top: 120px;        /* スクロール時に画面上で止まる位置 */
+    padding: 20px;
+    margin-bottom: 0;
+    grid-column: 1;    /* グリッドの左側に配置 */
+    grid-row: 1 / 100; /* 行を下に伸ばす（右側のカードが何枚並んでも崩れないように） */
+}
+
+/* リンクを縦並びにする */
+.anchor-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* 縦並びに変更 */
+    gap: 12px;
+}
+
+.anchor-links li a {
+    display: block; 
+    background-color: #ebf7f1; 
+    color: #2c5140;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.anchor-links li a:hover {
+    background-color: #cde6d8; 
+    transform: translateY(-2px);
+    color: #1e3a2d;
+}
+
+/* カード（右側のプロジェクト一覧）の設定 */
+.category-menu ~ .card {
+    grid-column: 2; /* グリッドの右側に配置 */
+    margin-left: 0; /* 前回の margin-left をリセット */
+    max-width: 1200px; /* カード単体の最大幅は元々の1200pxに保つ */
+    width: 100%;
+}
+
+/* --- スマホなど画面幅が狭い場合の調整 --- */
+@media (max-width: 1000px) {
+    main:has(.category-menu) {
+        display: block; /* 画面が狭いときは横並び（グリッド）を解除 */
+        max-width: 1200px;
+    }
+    .category-menu {
+        position: static; /* 追従を解除して元の位置に */
+        width: auto;
+        grid-column: auto;
+        grid-row: auto;
+        margin-bottom: 35px;
+    }
+    .anchor-links {
+        flex-direction: row; /* 横並びに戻す */
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .category-menu ~ .card {
+        grid-column: auto;
+        max-width: none;
     }
 }
