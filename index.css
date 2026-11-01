@@ -7,41 +7,123 @@ body {
     font-family: 'Zen Maru Gothic', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #384e44; /* 目に優しい深みのあるナチュラルグリーン */
+    color: #384e44; 
     line-height: 1.8;
-    
-    /* ▼▼▼ ここから変更・追加 ▼▼▼ */
-    /* 春(今の色) -> 夏 -> 秋 -> 冬 -> 春(ループ用) の大きなグラデーションを作成 */
-    background: linear-gradient(
-        180deg, 
-        #d3f0f7 0%, #e6f7f2 5%, #d8eee6 10%,     /* 春 (現在のお気に入りの色) */
-        #b2ebf2 25%, #81d4fa 30%, #a5d6a7 35%,   /* 夏 (爽やかな水色と新緑) */
-        #fff9c4 50%, #ffcc80 55%, #ffab91 60%,   /* 秋 (夕暮れと紅葉) */
-        #e3f2fd 75%, #bbdefb 80%, #90caf9 85%,   /* 冬 (澄んだ冬空) */
-        #d3f0f7 95%, #e6f7f2 98%, #d8eee6 100%   /* 春 (ループして繋げる用) */
-    );
-    background-size: 100% 1000%; /* グラデーションを縦に長く引き延ばす */
-    animation: changeSeasons 120s linear infinite; /* 120秒かけてゆっくり春夏秋冬を巡る */
-    /* ▲▲▲ ここまで変更・追加 ▲▲▲ */
     
     background-attachment: fixed;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+
+    /* 市松模様（オセロ風の格子柄）の定義 */
+    --ichimatsu: conic-gradient(
+        rgba(0, 0, 0, 0.03) 90deg, 
+        transparent 90deg 180deg, 
+        rgba(0, 0, 0, 0.03) 180deg 270deg, 
+        transparent 270deg
+    );
+    background-size: 80px 80px, 100% 100%;
+    
+    /* ▼▼▼ 追加：市松模様をゆっくり動かすアニメーション ▼▼▼ */
+    /* 15秒かけて非常にゆっくりと動かし、無限にループさせます */
+    animation: scrollIchimatsu 7.5s linear infinite; 
 }
 
-/* 追加: 背景を移動させて季節の変化を表現するアニメーション */
-@keyframes changeSeasons {
+/* ===================================================
+   市松模様のスクロールアニメーション
+   =================================================== */
+@keyframes scrollIchimatsu {
     0% {
-        background-position: 0% 0%;
+        /* スタート位置：市松模様(0px 0px)、グラデーション(0% 0%) */
+        background-position: 0px 0px, 0% 0%;
     }
     100% {
-        background-position: 0% 100%;
+        /* ゴール位置：市松模様を1パターン分(80px)斜めに動かす */
+        /* 背景のグラデーションは動かさず固定(0% 0%)にしておく */
+        background-position: -80px 0px, 0% 0%;
     }
 }
 
 /* ===================================================
-   ふわふわ漂う背景アニメーション（綿毛や光のイメージ）
+   季節ごとの背景色（市松模様 ＋ 淡いグラデーション）
+   =================================================== */
+body.season-spring {
+    /* 春：深みのある桜葉色を30%まで保ち、右上の白に近い緑へ */
+    background-image: 
+        var(--ichimatsu), 
+        linear-gradient(45deg, #d8eee6 30%, #e6f7f2 75%, #f4fbf9 100%);
+}
+body.season-summer {
+    /* 夏：少しだけ濃い空色を30%まで保ち、右上の明るい水色へ */
+    background-image: 
+        var(--ichimatsu), 
+        linear-gradient(45deg, #81d4fa 30%, #b2ebf2 75%, #e0f7fa 100%);
+}
+body.season-autumn {
+    /* 秋：夕暮れのような温かい黄色を30%まで保ち、右上の淡いクリーム色へ */
+    background-image: 
+        var(--ichimatsu), 
+        linear-gradient(45deg, #ffe082 30%, #fff9c4 75%, #fffde7 100%);
+}
+body.season-winter {
+    /* 冬：澄んだアイシーブルーを30%まで保ち、右上の雪のような白へ */
+    background-image: 
+        var(--ichimatsu), 
+        linear-gradient(45deg, #bbdefb 30%, #e3f2fd 75%, #f4faff 100%);
+}
+
+/* ===================================================
+   背景の装飾（ふんわり光る白い太陽）
+   =================================================== */
+body::before {
+    content: '';
+    position: fixed; /* 画面をスクロールしても定位置に固定 */
+    top: -80px;      /* 少し画面外にはみ出させる */
+    right: -80px;
+    width: 450px;
+    height: 450px;
+    
+    /* 中心は真っ白で、外側に向かって透明に溶け込むグラデーション */
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 75%);
+    border-radius: 50%;
+    
+    z-index: -1; /* パーティクルやコンテンツより後ろに配置 */
+    pointer-events: none; /* クリック等の邪魔にならないようにする */
+
+    /* マウスの動きに対するパララックス効果 */
+    transform: translate(calc((var(--mouse-x, 0.5) - 0.5) * -40px), calc((var(--mouse-y, 0.5) - 0.5) * -40px));
+    transition: transform 0.3s ease-out; /* なめらかに追従させる */
+}
+
+/* ===================================================
+   背景の装飾（左上から垂れる木の枝）
+   =================================================== */
+body::after {
+    content: '';
+    position: fixed;
+    top: 10px;     /* 位置を少し下に下げました（元: -20px → 新: 10px） */
+    left: -20px;
+    width: 600px;
+    height: 400px;
+    
+    /* 
+       根元の太さを約半分に抑え、より洗練されたシルエットに調整したSVG
+    */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Cg fill='%238b7d5a'%3E%3C!-- メインの幹（根元を細く調整） --%3E%3Cpath d='M-10,5 Q 120,30 280,150 A 2,2 0 0,1 276,154 Q 120,45 -10,35 Z' /%3E%3C!-- 枝1 (上向き) --%3E%3Cpath d='M 60,15 Q 150,-10 240,40 A 1.5,1.5 0 0,1 238,44 Q 150,5 75,30 Z' /%3E%3C!-- 枝2 (下向き) --%3E%3Cpath d='M 140,70 Q 200,80 260,110 A 1.5,1.5 0 0,1 258,114 Q 200,90 150,90 Z' /%3E%3C!-- 枝3 (中間から伸びる) --%3E%3Cpath d='M 120,35 Q 200,30 270,70 A 1.5,1.5 0 0,1 268,74 Q 200,45 135,55 Z' /%3E%3C!-- 枝4 (下に垂れる) --%3E%3Cpath d='M 80,40 Q 120,70 160,130 A 1.5,1.5 0 0,1 156,132 Q 115,75 90,55 Z' /%3E%3C!-- 枝5 (先端の細かい枝) --%3E%3Cpath d='M 190,95 Q 220,130 240,160 A 1,1 0 0,1 236,162 Q 215,130 195,105 Z' /%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+
+    /* マウスの動きに対するパララックス効果 */
+    transform: translate(calc((var(--mouse-x, 0.5) - 0.5) * 30px), calc((var(--mouse-y, 0.5) - 0.5) * 30px));
+    transition: transform 0.3s ease-out;
+}
+
+/* ===================================================
+   季節のパーティクル（降る＋左に流れるアニメーション）
    =================================================== */
 .fluff-container {
     position: fixed;
@@ -51,26 +133,41 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden; 
 }
 
-.fluff {
+.particle {
     position: absolute;
-    font-size: 1.6rem;
-    opacity: 0.5;
-    animation: float 8s infinite ease-in-out;
+    opacity: 0.7;
+    user-select: none;
+    animation-name: fall, sway;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear, ease-in-out;
+    
+    /* JSから受け取った開始位置をセット */
+    left: var(--start-left); 
 }
 
-.fluff-1 { top: 15%; left: 8%; animation-duration: 9s; }
-.fluff-2 { top: 35%; right: 10%; animation-duration: 7s; animation-delay: 1s; }
-.fluff-3 { bottom: 25%; left: 12%; animation-duration: 10s; animation-delay: 2s; }
-.fluff-4 { top: 70%; right: 18%; animation-duration: 8s; animation-delay: 0.5s; }
+/* 落下 ＆ 左への風の動き */
+@keyframes fall {
+    0% {
+        top: -10%;
+        left: var(--start-left);
+    }
+    100% {
+        top: 110%; /* 画面下へ */
+        /* 開始位置から左へ画面幅の40%分（40vw）流される */
+        left: calc(var(--start-left) - 40vw); 
+    }
+}
 
-@keyframes float {
+/* 揺れアニメーション（前回と同じ） */
+@keyframes sway {
     0%, 100% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateX(0) rotate(0deg);
     }
     50% {
-        transform: translateY(-20px) rotate(12deg);
+        transform: translateX(25px) rotate(45deg);
     }
 }
 
@@ -152,13 +249,16 @@ main {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
+    /* 真っ白ではなく、ほんのり温かみのある透かしグラデーション */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(253, 250, 246, 0.85));
+    backdrop-filter: blur(10px);
     border-radius: 24px;
     padding: 35px 40px;
     margin-bottom: 28px;
-    box-shadow: 0 10px 25px rgba(100, 150, 140, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.9);
+    /* 影にも薄いゴールド・琥珀色を混ぜて上品に */
+    box-shadow: 0 10px 30px rgba(212, 196, 153, 0.2), 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* 枠線をシャンパンゴールド（淡い金茶色）の二重線に */
+    border: 4px double #e8dcc4; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -168,19 +268,57 @@ main {
 }
 
 h2 {
-    color: #2c5140;
+    /* 文字色を深い緑〜金茶色のグラデーションに */
+    background: linear-gradient(45deg, #2c5140, #8b7d5a);
+    -webkit-background-clip: text; /* 既存の記述 */
+    background-clip: text;         /* 追加: 標準プロパティ */
+    
+    -webkit-text-fill-color: transparent; /* 既存の記述 */
+    
     margin-top: 0;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     font-size: 1.45rem;
+    letter-spacing: 0.1em; /* 字間を少し広げて、ゆったりとした雅さを演出 */
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px dashed #cde6d8;
-    padding-bottom: 10px;
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: none; 
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    /* 抹茶色と淡い黄色の斜めストライプ */
+    background: repeating-linear-gradient(
+        -45deg,
+        #88cb9e,
+        #88cb9e 10px,
+        #fff9c4 10px,
+        #fff9c4 20px
+    );
 }
 
 .title-icon {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    /* 雅な珊瑚色〜薄紅色のグラデーション */
+    background: linear-gradient(135deg, #f4cda5, #e6a992);
+    border-radius: 12px;
+    border: 2px solid #ffffff; /* 洗練された白い実線 */
+    box-shadow: 2px 3px 8px rgba(230, 169, 146, 0.4); /* ふんわりとした色の影 */
+    margin-right: 5px;
+    transform: rotate(-3deg); 
 }
 
 p {
@@ -211,7 +349,7 @@ a:hover {
     background: #f4faf6;
     padding: 16px 20px;
     border-radius: 16px;
-    border: 1px solid #d8ebd9;
+    border: 4px double #d8ebd9;
     text-decoration: none;
     transition: all 0.25s ease;
 }
@@ -245,21 +383,23 @@ a:hover {
 
 .btn {
     display: inline-block;
-    padding: 10px 24px;
-    background: #5ea872;
+    padding: 10px 26px;
+    /* 抹茶ミルクのような色に、わずかな奥行き（グラデーション）を持たせる */
+    background: linear-gradient(135deg, #73a985, #5c8d6d); 
     color: #ffffff;
     border-radius: 50px;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(94, 168, 114, 0.3);
+    letter-spacing: 0.05em;
+    border: 1px solid #e8dcc4; /* 細いシャンパンゴールドの縁取り */
+    box-shadow: 0 4px 15px rgba(115, 169, 133, 0.25);
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background: #4d9360;
+    background: linear-gradient(135deg, #5c8d6d, #4a755a);
     color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(94, 168, 114, 0.4);
-    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(115, 169, 133, 0.4);
 }
 
 /* ===================================================
@@ -340,4 +480,37 @@ footer {
     .project-images {
         grid-template-columns: 1fr; /* 縦並びに切り替え */
     }
+}
+
+
+/* ===================================================
+   背景の装飾（中央下部の霊山と雲海）
+   =================================================== */
+#particle-container::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 画面下部の約45%の高さを占めるように配置 */
+    height: 45vh; 
+    min-height: 250px;
+    
+    /* 富士山風の末広がりの霊山と、連なる山々のシルエット（枝と同じ金茶色ベース） */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cpath d='M 600,40 Q 850,200 1200,400 L 0,400 Q 350,200 600,40 Z' fill='%238b7d5a'/%3E%3Cpath d='M 250,180 Q 450,250 700,400 L -100,400 Q 100,250 250,180 Z' fill='%237a6c4c' opacity='0.6'/%3E%3Cpath d='M 950,150 Q 1100,250 1300,400 L 550,400 Q 750,250 950,150 Z' fill='%237a6c4c' opacity='0.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover; 
+    
+    opacity: 0.15; /* 遠景のように薄くかすませる */
+    z-index: -1;
+    pointer-events: none;
+    
+    /* 山の下側が雲海に溶け込むように、下に向かって透明にするグラデーションマスク */
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+
+    /* マウスの動きに対するパララックス効果 */
+    transform: translate(calc((var(--mouse-x, 0.5) - 0.5) * -15px), calc((var(--mouse-y, 0.5) - 0.5) * -5px));
+    transition: transform 0.3s ease-out;
 }
