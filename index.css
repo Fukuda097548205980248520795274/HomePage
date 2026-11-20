@@ -835,34 +835,34 @@ main:has(.category-menu) {
 #particle-container::before {
     content: '';
     position: fixed;
-    bottom: -20px;
-    right: -20px;
-    width: 450px;
-    height: 700px;
+    /* 変更: 下の途切れが見えないよう、画面下部より大きくはみ出させる */
+    bottom: -250px;
+    right: -40px;
+    width: 600px;
+    /* 変更: 下にずらした分、全体の高さを増やして上まで届かせる */
+    height: 1000px;
     
     /* 
-       上下を透明（transparent）にして、徐々にフェードアウトさせる
-       季節ごとのテーマカラーは中間部分（25%〜75%）で表示
+       変更: 上端がプツッと切れないよう、透明（transparent）の範囲を上部20%まで広げ、
+       なだらかに色がつくように調整
     */
     background: linear-gradient(
         to bottom, 
         transparent 0%, 
-        var(--accent-color1) 25%, 
-        var(--accent-color2) 75%, 
+        transparent 20%, 
+        var(--accent-color1) 45%, 
+        var(--accent-color2) 80%, 
         transparent 100%
     );
     opacity: 0.65;
     z-index: -2;
     pointer-events: none;
 
-    /* 
-       カーブの回数（うねうね）を4回に増やしたSVG 
-    */
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 350,0 C 50,80 50,120 250,200 S 450,320 250,400 S 50,520 250,600 S 450,720 250,800' stroke-width='24' /%3E%3Cpath d='M 420,0 C 120,80 120,120 320,200 S 520,320 320,400 S 120,520 320,600 S 520,720 320,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 350,0 C 50,80 50,120 250,200 S 450,320 250,400 S 50,520 250,600 S 450,720 250,800' stroke-width='24' /%3E%3Cpath d='M 420,0 C 120,80 120,120 320,200 S 520,320 320,400 S 120,520 320,600 S 520,720 320,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-150 0 950 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 420,0 C 70,80 10,120 360,200 S 650,320 300,400 S -110,520 240,600 S 530,720 180,800' stroke-width='24' /%3E%3Cpath d='M 480,0 C 130,80 70,120 420,200 S 710,320 360,400 S -50,520 300,600 S 590,720 240,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-150 0 950 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 420,0 C 70,80 10,120 360,200 S 650,320 300,400 S -110,520 240,600 S 530,720 180,800' stroke-width='24' /%3E%3Cpath d='M 480,0 C 130,80 70,120 420,200 S 710,320 360,400 S -50,520 300,600 S 590,720 240,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
     
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: bottom right;
