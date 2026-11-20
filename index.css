@@ -15,32 +15,31 @@ body {
     position: relative;
     overflow-x: hidden;
 
-    /* 市松模様（オセロ風の格子柄）の定義 */
-    --ichimatsu: conic-gradient(
-        rgba(0, 0, 0, 0.03) 90deg, 
-        transparent 90deg 180deg, 
-        rgba(0, 0, 0, 0.03) 180deg 270deg, 
-        transparent 270deg
-    );
-    background-size: 80px 80px, 100% 100%;
+    /* 模様と線のすべてが、画面中央の広い範囲でフェードアウトするSVG */
+    --wagara: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2400' height='100%25'%3E%3Cdefs%3E%3Cpattern id='ichi' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Crect width='30' height='30' fill='rgba(0,0,0,0.03)'/%3E%3Crect x='30' y='30' width='30' height='30' fill='rgba(0,0,0,0.03)'/%3E%3C/pattern%3E%3Cpattern id='shippo' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='0' cy='30' r='30' fill='none' stroke='rgba(0,0,0,0.03)' stroke-width='4'/%3E%3Ccircle cx='60' cy='30' r='30' fill='none' stroke='rgba(0,0,0,0.03)' stroke-width='4'/%3E%3Ccircle cx='30' cy='0' r='30' fill='none' stroke='rgba(0,0,0,0.03)' stroke-width='4'/%3E%3Ccircle cx='30' cy='60' r='30' fill='none' stroke='rgba(0,0,0,0.03)' stroke-width='4'/%3E%3C/pattern%3E%3Cpattern id='koushi' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Crect width='6' height='60' fill='rgba(0,0,0,0.03)'/%3E%3Crect width='60' height='6' fill='rgba(0,0,0,0.03)'/%3E%3C/pattern%3E%3ClinearGradient id='centerMaskGrad' x1='0' y1='0' x2='0' y2='100%25'%3E%3Cstop offset='10%25' stop-color='white'/%3E%3Cstop offset='40%25' stop-color='black'/%3E%3Cstop offset='60%25' stop-color='black'/%3E%3Cstop offset='90%25' stop-color='white'/%3E%3C/linearGradient%3E%3Cmask id='centerMask'%3E%3Crect width='100%25' height='100%25' fill='url(%23centerMaskGrad)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23centerMask)'%3E%3C!-- 1列目 --%3E%3Crect x='0' y='0' width='800' height='30%25' fill='url(%23ichi)'/%3E%3Crect x='0' y='30%25' width='800' height='70%25' fill='url(%23shippo)'/%3E%3C!-- 2列目 --%3E%3Crect x='800' y='0' width='800' height='75%25' fill='url(%23koushi)'/%3E%3Crect x='800' y='75%25' width='800' height='25%25' fill='url(%23ichi)'/%3E%3C!-- 3列目 --%3E%3Crect x='1600' y='0' width='800' height='40%25' fill='url(%23shippo)'/%3E%3Crect x='1600' y='40%25' width='800' height='60%25' fill='url(%23koushi)'/%3E%3C!-- 境界線 --%3E%3Cg stroke='rgba(0,0,0,0.08)' stroke-width='6'%3E%3Cline x1='0' y1='0' x2='0' y2='100%25'/%3E%3Cline x1='800' y1='0' x2='800' y2='100%25'/%3E%3Cline x1='1600' y1='0' x2='1600' y2='100%25'/%3E%3Cline x1='0' y1='30%25' x2='800' y2='30%25'/%3E%3Cline x1='800' y1='75%25' x2='1600' y2='75%25'/%3E%3Cline x1='1600' y1='40%25' x2='2400' y2='40%25'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+    /* ▼ 変更：塗りつぶし色を障子と同じ rgba(0,0,0,0.03) にし、配置をランダムにしたSVG */
+    --asanoha: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cdefs%3E%3Cg id='c'%3E%3Ccircle r='40'/%3E%3Ccircle r='30'/%3E%3Ccircle r='20'/%3E%3Ccircle r='10'/%3E%3C/g%3E%3Cpattern id='p' width='50' height='50' patternUnits='userSpaceOnUse'%3E%3Cg fill='white' stroke='black' stroke-width='3'%3E%3Cuse href='%23c' x='25' y='-25'/%3E%3Cuse href='%23c' x='0' y='0'/%3E%3Cuse href='%23c' x='50' y='0'/%3E%3Cuse href='%23c' x='-25' y='25'/%3E%3Cuse href='%23c' x='25' y='25'/%3E%3Cuse href='%23c' x='75' y='25'/%3E%3Cuse href='%23c' x='0' y='50'/%3E%3Cuse href='%23c' x='50' y='50'/%3E%3Cuse href='%23c' x='-25' y='75'/%3E%3Cuse href='%23c' x='25' y='75'/%3E%3Cuse href='%23c' x='75' y='75'/%3E%3C/g%3E%3C/pattern%3E%3Cmask id='m'%3E%3Ccircle cx='100' cy='100' r='90' fill='url(%23p)'/%3E%3C/mask%3E%3C/defs%3E%3Cg fill='rgba(0,0,0,0.03)'%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(40, 60) scale(0.85)' mask='url(%23m)'/%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(420, 30) scale(0.5)' mask='url(%23m)'/%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(680, 200) scale(0.35)' mask='url(%23m)'/%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(180, 380) scale(0.6)' mask='url(%23m)'/%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(480, 480) scale(0.9)' mask='url(%23m)'/%3E%3Ccircle cx='100' cy='100' r='90' transform='translate(60, 620) scale(0.4)' mask='url(%23m)'/%3E%3C/g%3E%3C/svg%3E");
+        
+    /* ▼ 変更：麻の葉(2層目)のサイズを 800px 800px に広げ、ランダムな配置を活かす */
+    background-size: 2400px 100%, 800px 800px, 100% 100%;
+    background-repeat: repeat-x, repeat, no-repeat;
     
-    /* ▼▼▼ 追加：市松模様をゆっくり動かすアニメーション ▼▼▼ */
-    /* 15秒かけて非常にゆっくりと動かし、無限にループさせます */
-    animation: scrollIchimatsu 7.5s linear infinite; 
+    /* ▼ 変更：アニメーション名を新しくする */
+    animation: scrollBackgrounds 100s linear infinite;
 }
 
 /* ===================================================
-   市松模様のスクロールアニメーション
+   和柄パターンのスクロールアニメーション
    =================================================== */
-@keyframes scrollIchimatsu {
+@keyframes scrollBackgrounds {
     0% {
-        /* スタート位置：市松模様(0px 0px)、グラデーション(0% 0%) */
-        background-position: 0px 0px, 0% 0%;
+        /* 1層目: 障子, 2層目: 麻の葉, 3層目: グラデーション */
+        background-position: 0px 0px, 0px 0px, 0% 0%;
     }
     100% {
-        /* ゴール位置：市松模様を1パターン分(80px)斜めに動かす */
-        /* 背景のグラデーションは動かさず固定(0% 0%)にしておく */
-        background-position: -80px 0px, 0% 0%;
+        /* 麻の葉は障子よりも速く流して奥行き（視差効果）を出す */
+        background-position: -2400px 0px, -4000px 0px, 0% 0%;
     }
 }
 
@@ -51,6 +50,105 @@ body {
     100% {
         opacity: 1;
     }
+}
+
+
+/* ===================================================
+   季節ごとの背景色 ＋ 季節のテーマカラー変数の定義
+   =================================================== */
+body.season-spring {
+    /* 春：ふんわりとした桜色・コーラル系 */
+    --accent-color1: #f4cda5;
+    --accent-color2: #e6a992;
+    --btn-color1: #e4a29a;
+    --btn-color2: #d37d71;
+    --border-color: #fceceb;
+    --text-accent: #c27a7e;
+    
+    background-image: 
+        var(--wagara), 
+        var(--asanoha),
+        linear-gradient(45deg, #d8eee6 30%, #e6f7f2 75%, #f4fbf9 100%);
+}
+
+body.season-summer {
+    /* 夏：現在のデザイン（さわやかな抹茶・新緑系） */
+    --accent-color1: #f4cda5;
+    --accent-color2: #e6a992; 
+    --btn-color1: #73a985;
+    --btn-color2: #5c8d6d;
+    --border-color: #e8dcc4;
+    --text-accent: #8b7d5a;
+    
+    background-image: 
+        var(--wagara), 
+        var(--asanoha),
+        linear-gradient(45deg, #81d4fa 30%, #b2ebf2 75%, #e0f7fa 100%);
+}
+
+body.season-autumn {
+    /* 秋：紅葉を思わせる温かい赤茶・マスタード系 */
+    --accent-color1: #f4d068;
+    --accent-color2: #e09f3e;
+    --btn-color1: #c97a4e;
+    --btn-color2: #a65830;
+    --border-color: #f7e6d0;
+    --text-accent: #9c5c36;
+    
+    background-image: 
+        var(--wagara), 
+        var(--asanoha),
+        linear-gradient(45deg, #ffe082 30%, #fff9c4 75%, #fffde7 100%);
+}
+
+body.season-winter {
+    /* 冬：澄んだ雪のようなアイシーブルー・シルバー系 */
+    --accent-color1: #c4e0f9;
+    --accent-color2: #9bc0e3;
+    --btn-color1: #78a1c6;
+    --btn-color2: #5982a3;
+    --border-color: #e6eff7;
+    --text-accent: #6b88a1;
+    
+    background-image: 
+        var(--wagara), 
+        var(--asanoha),
+        linear-gradient(45deg, #bbdefb 30%, #e3f2fd 75%, #f4faff 100%);
+}
+
+
+/* ===================================================
+   季節切り替えボタン
+   =================================================== */
+.season-switcher {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 8px 12px;
+    border-radius: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+.season-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.season-btn:hover {
+    transform: scale(1.15) translateY(-2px);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 
@@ -90,25 +188,29 @@ body {
 body.season-spring {
     /* 春：深みのある桜葉色を30%まで保ち、右上の白に近い緑へ */
     background-image: 
-        var(--ichimatsu), 
+        var(--wagara), 
+        var(--asanoha),
         linear-gradient(45deg, #d8eee6 30%, #e6f7f2 75%, #f4fbf9 100%);
 }
 body.season-summer {
     /* 夏：少しだけ濃い空色を30%まで保ち、右上の明るい水色へ */
     background-image: 
-        var(--ichimatsu), 
+        var(--wagara), 
+        var(--asanoha),
         linear-gradient(45deg, #81d4fa 30%, #b2ebf2 75%, #e0f7fa 100%);
 }
 body.season-autumn {
     /* 秋：夕暮れのような温かい黄色を30%まで保ち、右上の淡いクリーム色へ */
     background-image: 
-        var(--ichimatsu), 
+        var(--wagara), 
+        var(--asanoha),
         linear-gradient(45deg, #ffe082 30%, #fff9c4 75%, #fffde7 100%);
 }
 body.season-winter {
     /* 冬：澄んだアイシーブルーを30%まで保ち、右上の雪のような白へ */
     background-image: 
-        var(--ichimatsu), 
+        var(--wagara), 
+        var(--asanoha),
         linear-gradient(45deg, #bbdefb 30%, #e3f2fd 75%, #f4faff 100%);
 }
 
@@ -299,7 +401,7 @@ main {
     /* 影にも薄いゴールド・琥珀色を混ぜて上品に */
     box-shadow: 0 10px 30px rgba(212, 196, 153, 0.2), 0 4px 10px rgba(0, 0, 0, 0.05);
     /* 枠線をシャンパンゴールド（淡い金茶色）の二重線に */
-    border: 4px double #e8dcc4; 
+    border: 4px double var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -310,11 +412,10 @@ main {
 
 h2 {
     /* 文字色を深い緑〜金茶色のグラデーションに */
-    background: linear-gradient(45deg, #2c5140, #8b7d5a);
-    -webkit-background-clip: text; /* 既存の記述 */
-    background-clip: text;         /* 追加: 標準プロパティ */
-    
-    -webkit-text-fill-color: transparent; /* 既存の記述 */
+    background: linear-gradient(45deg, #2c5140, var(--text-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     
     margin-top: 0;
     margin-bottom: 20px;
@@ -354,10 +455,10 @@ h2::after {
     width: 38px;
     height: 38px;
     /* 雅な珊瑚色〜薄紅色のグラデーション */
-    background: linear-gradient(135deg, #f4cda5, #e6a992);
+    background: linear-gradient(135deg, var(--accent-color1), var(--accent-color2));
     border-radius: 12px;
     border: 2px solid #ffffff; /* 洗練された白い実線 */
-    box-shadow: 2px 3px 8px rgba(230, 169, 146, 0.4); /* ふんわりとした色の影 */
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.15);
     margin-right: 5px;
     transform: rotate(-3deg); 
 }
@@ -427,18 +528,18 @@ a:hover {
     display: inline-block;
     padding: 10px 26px;
     /* 抹茶ミルクのような色に、わずかな奥行き（グラデーション）を持たせる */
-    background: linear-gradient(135deg, #73a985, #5c8d6d); 
+    background: linear-gradient(135deg, var(--btn-color1), var(--btn-color2));
     color: #ffffff;
     border-radius: 50px;
     font-weight: 500;
     letter-spacing: 0.05em;
-    border: 1px solid #e8dcc4; /* 細いシャンパンゴールドの縁取り */
-    box-shadow: 0 4px 15px rgba(115, 169, 133, 0.25);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 影を汎用化 */
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #5c8d6d, #4a755a);
+    background: linear-gradient(135deg, var(--btn-color2), var(--btn-color1));
     color: #ffffff;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(115, 169, 133, 0.4);
@@ -726,4 +827,48 @@ main:has(.category-menu) {
         flex-wrap: wrap;
         justify-content: center;
     }
+}
+
+/* ===================================================
+   背景の装飾（右下のうねうねした川・流水紋風）
+   =================================================== */
+#particle-container::before {
+    content: '';
+    position: fixed;
+    bottom: -20px;
+    right: -20px;
+    width: 450px;
+    height: 700px;
+    
+    /* 
+       上下を透明（transparent）にして、徐々にフェードアウトさせる
+       季節ごとのテーマカラーは中間部分（25%〜75%）で表示
+    */
+    background: linear-gradient(
+        to bottom, 
+        transparent 0%, 
+        var(--accent-color1) 25%, 
+        var(--accent-color2) 75%, 
+        transparent 100%
+    );
+    opacity: 0.65;
+    z-index: -2;
+    pointer-events: none;
+
+    /* 
+       カーブの回数（うねうね）を4回に増やしたSVG 
+    */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 350,0 C 50,80 50,120 250,200 S 450,320 250,400 S 50,520 250,600 S 450,720 250,800' stroke-width='24' /%3E%3Cpath d='M 420,0 C 120,80 120,120 320,200 S 520,320 320,400 S 120,520 320,600 S 520,720 320,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 800'%3E%3Cg fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M 350,0 C 50,80 50,120 250,200 S 450,320 250,400 S 50,520 250,600 S 450,720 250,800' stroke-width='24' /%3E%3Cpath d='M 420,0 C 120,80 120,120 320,200 S 520,320 320,400 S 120,520 320,600 S 520,720 320,800' stroke-width='6' /%3E%3C/g%3E%3C/svg%3E");
+    
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: bottom right;
+    mask-position: bottom right;
+
+    /* マウスの動きに合わせたパララックス効果 */
+    transform: translate(calc((var(--mouse-x, 0.5) - 0.5) * 25px), calc((var(--mouse-y, 0.5) - 0.5) * 15px));
+    transition: transform 0.3s ease-out;
 }
